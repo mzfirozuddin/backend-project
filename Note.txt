@@ -1,0 +1,2 @@
+Always use try-catch block for DB connection for error handle.
+DB is always in another continent. (That's why it take time to fetch data. So use async-await)
