@@ -1,0 +1,11 @@
+TODO:
+1. Register Controller:
+    [+] get user details from frontend
+    [+] validation:- not empty
+    [+] check if user already exists:- username, email
+    [+] collect images, check for avatar
+    [+] upload them to cloudinary, check avatar
+    [+] create user object:- create entry in DB 
+    [+] remove password and refreshToken field from response
+    [+] check for user creation
+    [+] return response
