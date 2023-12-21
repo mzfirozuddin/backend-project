@@ -13,6 +13,7 @@ export { asyncHandler };
 //- higher order func concept
 // const asyncHandler = () => {}
 // const asyncHandler = (fn) => { () => {} }
+// const asyncHandler = (fn) => { async () => {} }
 // const asyncHandler = (fn) =>  async () => {} 
 
 

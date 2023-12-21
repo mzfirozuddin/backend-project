@@ -9,3 +9,22 @@ TODO:
     [+] remove password and refreshToken field from response
     [+] check for user creation
     [+] return response
+
+2. Login Controller:
+    [+] get user details from req.body
+    [+] validation:- not empty
+    [+] check user present or not in DB -> username or email
+    [+] if present -> check password is correct or not
+    [+] generate accessToken and refreshToken
+    [+] save refreshToken in DB
+    [+] send accessToken and refreshToken in cookies & return response
+
+3. Logout Controller:
+    # Middleware:-
+        [+] get accessToken from cookies or Autorization header
+        [+] verify token & get required data from token
+        [+] check user is valid for Logout
+        [+] add user to "req" object 
+    [+] remove refreshToken from DB
+    [+] remove accessToken and refreshToken from cookies & return response
+ 

@@ -48,7 +48,9 @@ const userSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 //NOTE: In "pre()" hook don't use arrow function because in arrow function we don't have "this" access
+// Before save the document "pre" middleware function will execute.
 userSchema.pre("save", async function(next) {
+    // If password field is not modified then don't hash the password again.
     if (!this.isModified("password")) return next();
 
     this.password = await bcrypt.hash(this.password, 10);
