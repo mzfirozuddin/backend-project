@@ -27,4 +27,5 @@ TODO:
         [+] add user to "req" object 
     [+] remove refreshToken from DB
     [+] remove accessToken and refreshToken from cookies & return response
+            (refreshToken is also called session storage)
  

@@ -99,6 +99,7 @@ const loginUser = asyncHandler( async(req, res) => {
     //: get user details from req.body
     // user can send username or email and password
     const { username, email, password } = req.body;
+    // console.log(req.body);
 
     //: validation:- not empty
     if (!(username || email)) {
@@ -152,17 +153,24 @@ const loginUser = asyncHandler( async(req, res) => {
 
 const logoutUser = asyncHandler( async (req, res) => {
     //: remove refreshToken from DB
-    await User.findByIdAndUpdate(
+    const newData = await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                refreshToken: undefined
+            // $set: {     //? $set not working for this case
+            //     refreshToken: undefined
+            // }
+
+            //? That's why we use "$unset" for remove "refreshToken" field from DB 
+            $unset: {
+                refreshToken: 1
             }
         },
         {
             new: true
         }
     );
+
+    // console.log(newData);
 
     //: remove accessToken and refreshToken from cookies & return response
     const options = {
