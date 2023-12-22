@@ -28,4 +28,11 @@ TODO:
     [+] remove refreshToken from DB
     [+] remove accessToken and refreshToken from cookies & return response
             (refreshToken is also called session storage)
+
+4. Generate new accessToken and refreshToken:
+    [+] collect refreshToken from cookies or Autorization header or req.body.
+    [+] verify refreshToken.
+    [+] match collected refreshToken with DB_stored refreshToken
+    [+] if everithing ok, then generate new accessToken and refreshToken & store in DB.
+    [+] store new accessToken and refreshToken in cookies & send response.
  
