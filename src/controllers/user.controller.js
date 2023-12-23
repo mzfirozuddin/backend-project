@@ -235,9 +235,43 @@ const newAccessAndRefreshToken = asyncHandler( async (req, res) => {
 
 });
 
+const changeCurrentPassword = asyncHandler( async (req, res) => {
+    //: get old_password and new_password from req.body
+    const { oldPassword, newPassword } = req.body;
+
+    //: validation:- not empty
+    if (!oldPassword || !newPassword) {
+        throw new ApiError(400, "old password and new password both are required");
+    } 
+
+    //: get userId from req.user(auth middleware) and find user from DB
+    const user = await User.findById(req.user?._id);
+    if (!user) {
+        throw new ApiError(401, "Unauthorized access");
+    }
+
+    //: match old_password with DB_stored_password
+    const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+    if (!isPasswordValid) {
+        throw new ApiError(400, "Invalid old password");
+    }
+
+    //: If matched -> set new_password in "user" object and save it to DB
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+
+    //: return response
+    return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "Password changed successfully."));
+
+})
+
+
 export { 
     registerUser, 
     loginUser, 
     logoutUser,
-    newAccessAndRefreshToken
+    newAccessAndRefreshToken,
+    changeCurrentPassword
 };

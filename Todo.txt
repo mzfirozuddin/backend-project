@@ -20,7 +20,7 @@ TODO:
     [+] send accessToken and refreshToken in cookies & return response
 
 3. Logout Controller:
-    # Middleware:-
+    # Middleware:- "auth middleware"
         [+] get accessToken from cookies or Autorization header
         [+] verify token & get required data from token
         [+] check user is valid for Logout
@@ -29,10 +29,18 @@ TODO:
     [+] remove accessToken and refreshToken from cookies & return response
             (refreshToken is also called session storage)
 
-4. Generate new accessToken and refreshToken:
+4. Controller for generate new accessToken and refreshToken:
     [+] collect refreshToken from cookies or Autorization header or req.body.
     [+] verify refreshToken.
     [+] match collected refreshToken with DB_stored refreshToken
     [+] if everithing ok, then generate new accessToken and refreshToken & store in DB.
     [+] store new accessToken and refreshToken in cookies & send response.
- 
+
+5. Controller for change current password:
+    # Middleware:- "auth middleware"
+    [+] get old_password and new_password from req.body
+    [+] validation:- not empty
+    [+] get userId from req.user(auth middleware) and find user from DB
+    [+] match old_password with DB_stored_password
+    [+] if matched -> change password in "user" object and save it to DB
+    [+] return response
