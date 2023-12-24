@@ -44,3 +44,13 @@ TODO:
     [+] match old_password with DB_stored_password
     [+] if matched -> change password in "user" object and save it to DB
     [+] return response
+
+6. Controller for get current user:
+    # Middleware:- "auth middleware"
+    [+] get current user data from "req.user" (auth middleware) and return response
+
+7. Controller for update Account Details:
+    # Middleware:- "auth middleware"
+    [+] get account details that user want to update from req.body
+    [+] find user using "id" and update details
+    [+] return response
