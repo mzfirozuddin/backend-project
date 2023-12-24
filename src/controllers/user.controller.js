@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
@@ -329,6 +329,13 @@ const updateUserAvatar = asyncHandler( async (req, res) => {
         }
     ).select("-password -refreshToken");
 
+    //: delete old avatar image from clouinary
+    const avatarCloudinaryPath = req.user?.avatar.split("/");
+    const cloudinaryAvatarName = avatarCloudinaryPath[avatarCloudinaryPath.length - 1].split(".")[0];
+    // console.log(cloudinaryAvatarName);
+    const response = await deleteFromCloudinary(cloudinaryAvatarName);
+    // console.log("Controller: ", response);
+
     //: return response
     return res
         .status(200)
@@ -360,6 +367,13 @@ const updateUserCoverImage = asyncHandler( async (req, res) => {
             new: true
         }
     ).select("-password -refreshToken");
+
+    //: delete old cover image from clouinary
+    const coverImageCloudinaryPath = req.user?.coverImage.split("/");
+    const cloudinaryCoverImageName = coverImageCloudinaryPath[coverImageCloudinaryPath.length - 1].split(".")[0];
+    // console.log(cloudinaryCoverImageName);
+    const response = await deleteFromCloudinary(cloudinaryCoverImageName);
+    // console.log("Controller: ", response);
 
     //: return response
     return res

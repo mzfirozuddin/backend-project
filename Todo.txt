@@ -61,6 +61,7 @@ TODO:
     [+] get avatar local file path from req.file(multer middleware)
     [+] upload image on cloudinary
     [+] update "avatar" field on DB
+    [+] delete old avatar image from cloudinary
     [+] return response
 
 8. Controller for update user coverImage:
@@ -69,4 +70,5 @@ TODO:
     [+] get coverImage local file path from req.file(multer middleware)
     [+] upload image on cloudinary
     [+] update "coverImage" field on DB
+    [+] delete old cover image from cloudinary
     [+] return response
